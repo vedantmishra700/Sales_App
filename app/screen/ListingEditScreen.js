@@ -10,18 +10,72 @@ import {
 } from "../components/form";
 
 import Screen from "../components/Screen";
+import CategoryPickerItem from "../components/CategoryPickerItem";
+import FormImagePicker from "../components/form/FormImagePicker";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
   price: Yup.number().required().min(1).max(10000).label("Price"),
   description: Yup.string().label("Description"),
   category: Yup.object().required().nullable().label("Category"),
+  images: Yup.array().min(1, "Please select at least one image"),
 });
 
 const categories = [
-  { label: "Furniture", value: 1 },
-  { label: "Clothing", value: 2 },
-  { label: "Camera", value: 3 },
+  {
+    label: "Furniture",
+    value: 1,
+    backgroundColor: "red",
+    icon: "table-furniture",
+  },
+  {
+    label: "Clothing",
+    value: 2,
+    backgroundColor: "green",
+    icon: "tshirt-crew",
+  },
+  {
+    label: "Camera",
+    value: 3,
+    backgroundColor: "blue",
+    icon: "camera",
+  },
+  {
+    label: "Games",
+    value: 4,
+    backgroundColor: "dodgerblue",
+    icon: "desktop-classic",
+  },
+  {
+    label: "Cars",
+    value: 5,
+    backgroundColor: "tomato",
+    icon: "car",
+  },
+  {
+    label: "Sports",
+    value: 6,
+    backgroundColor: "gold",
+    icon: "cricket",
+  },
+  {
+    label: "Movies & Music",
+    value: 7,
+    backgroundColor: "lightblue",
+    icon: "music",
+  },
+  {
+    label: "Books",
+    value: 8,
+    backgroundColor: "orange",
+    icon: "book",
+  },
+  {
+    label: "Others",
+    value: 9,
+    backgroundColor: "yellowgreen",
+    icon: "bookmark-outline",
+  },
 ];
 
 export default function ListingEditScreen() {
@@ -33,22 +87,28 @@ export default function ListingEditScreen() {
           price: "",
           description: "",
           category: null,
+          images: [],
         }}
         onSubmit={(values) => console.log(values)}
         validationSchema={validationSchema}
       >
         <AppFormField maxLength={255} name="title" placeholder="Title" />
+
         <AppFormField
           keyboardType="numeric"
           maxLength={8}
           name="price"
           placeholder="Price"
+          width={120}
         />
 
         <AppFormPicker
           items={categories}
           name="category"
+          numberOfColumns={3}
+          PickerItemComponent={CategoryPickerItem}
           placeholder="Category"
+          width="50%"
         />
 
         <AppFormField
@@ -65,7 +125,7 @@ export default function ListingEditScreen() {
 }
 
 const styles = StyleSheet.create({
-  conatiner: {
+  container: {
     padding: 10,
   },
 });
