@@ -4,36 +4,20 @@ import AppText from "../components/AppText";
 import ListItem from "../components/ListItem";
 import colors from "../config/colors";
 
-function ListingDetailsScreen() {
+function ListingDetailsScreen({ route }) {
+  const listing = route.params;
   return (
     <View>
-      <View>
-        <Image style={styles.image} source={require("../assets/jacket.jpg")} />
-        <View style={styles.detailsContainer}>
-          <AppText style={styles.title}> Red Jacket for sale</AppText>
-          <AppText style={styles.subtitle}> $100</AppText>
-          <View style={styles.userContainer}>
-            <ListItem
-              image={require("../assets/mosh.jpg")}
-              title="Mosh Hamedani"
-              subtitle="6 Listings"
-            />
-          </View>
-        </View>
-      </View>
-
-      <View>
-        <Image style={styles.image} source={require("../assets/couch.jpg")} />
-        <View style={styles.detailsContainer}>
-          <AppText style={styles.title}> Couch in good Condition</AppText>
-          <AppText style={styles.subtitle}> $1000</AppText>
-          <View style={styles.userContainer}>
-            <ListItem
-              image={require("../assets/mosh.jpg")}
-              title="Mosh Hamedani"
-              subtitle="6 Listings"
-            />
-          </View>
+      <Image style={styles.image} source={listing.image} />
+      <View style={styles.detailsContainer}>
+        <AppText style={styles.title}> {listing.title}</AppText>
+        <AppText style={styles.subtitle}> ${listing.price}</AppText>
+        <View style={styles.userContainer}>
+          <ListItem
+            image={require("../assets/mosh.jpg")}
+            title="Mosh Hamedani"
+            subtitle="6 Listings"
+          />
         </View>
       </View>
     </View>
